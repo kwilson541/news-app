@@ -1,41 +1,42 @@
 (function(exports) {
 
 	function ArticleController(articleList) {
+		self = this;
 		this._articleList = articleList;
 	};
 
 	ArticleController.prototype.addArticle = function(headline, body) {
-		this._articleList.createArticle(headline, body);
+		self._articleList.createArticle(headline, body);
 	};
 
 	ArticleController.prototype.addArticleListView = function() {
-		this._articleListView = new ArticleListView(this._articleList);
+		self._articleListView = new ArticleListView(self._articleList);
 	};
 
 	ArticleController.prototype.updateHTML = function() {
-		var getArticleList = this._articleListView.listArticles();
+		var getArticleList = self._articleListView.listArticles();
 		var articleDisplay = document.getElementById("app");
 		articleDisplay.innerHTML = getArticleList;
 	};
 
 	ArticleController.prototype.requestXMLDoc = function() {
-		this.xhr = new XMLHttpRequest();
-		this.xhr.open("GET", "http://news-summary-api.herokuapp.com/guardian?apiRequestUrl=http://content.guardianapis.com/search?from-date=2017-01-01&to-date=2017-01-07", true)
-		this.xhr.onreadystatechange = function() {
+		self.xhr = new XMLHttpRequest();
+		self.xhr.open("GET", "http://news-summary-api.herokuapp.com/guardian?apiRequestUrl=http://content.guardianapis.com/search?from-date=2017-01-01&to-date=2017-01-07", true)
+		self.xhr.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
-				this.parsedResponse = JSON.parse(this.responseText)
+				this.resultsArray = JSON.parse(this.responseText).response.results;
+				self.processResultsArray(this.resultsArray);
 			};
 		};
-		this.xhr.send();
-		console.log(this.xhr.parsedResponse)
-		this.processResultsArray();
+		self.xhr.send();
 	};
 
-	ArticleController.prototype.processResultsArray = function() {
-		this.xhr.resultsArray.forEach(function(element) {
-			this.addArticle(element.webTitle);
+	ArticleController.prototype.processResultsArray = function(array) {
+		array.forEach(function(element) {
+			self.addArticle(element.webTitle);
 		});
-		this.updateHTML();
+		self.addArticleListView();
+		self.updateHTML();
 	};
 
 	exports.ArticleController = ArticleController;
