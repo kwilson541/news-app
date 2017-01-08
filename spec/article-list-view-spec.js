@@ -5,12 +5,17 @@ article.returnHeadline = function() {
 
 articleList = {}
 articleList.showArticles = function() {
-	return [article]
+	return [article];
 };
 
 multipleArticleList = {}
 multipleArticleList.showArticles = function() {
-	return [article, article]
+	return [article, article];
+};
+
+emptyArticleList = {}
+emptyArticleList.showArticles = function() {
+	return [];
 };
 
 (function testListArticles() {
@@ -21,4 +26,9 @@ multipleArticleList.showArticles = function() {
 (function testListMultipleArticles() {
 	var articleListView = new ArticleListView(multipleArticleList);
 	assert.isTrue(articleListView.listArticles() === '<ul><li><div>Headline</div></li><li><div>Headline</div></li></ul>')
+})();
+
+(function testListNoArticles() {
+	var articleListView = new ArticleListView(emptyArticleList);
+	assert.isTrue(articleListView.listArticles() === '<ul></ul>')
 })();
