@@ -7,7 +7,7 @@
 	ArticleListView.prototype.listArticles = function() {
 		articles = '<ul>';
 		this._articleList.showArticles().forEach(function(element) {
-			articles += `<li><div>${element.returnHeadline()}</div></li>`
+			articles += `<li><div><a href="${element.returnId()}">${element.returnHeadline()}</a></div></li>`;
 		});
 		articles += '</ul>';
 		return articles;
