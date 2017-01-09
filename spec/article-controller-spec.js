@@ -18,5 +18,5 @@ articleList.showArticles = function() {
 	app.id = "app";
 	document.body.appendChild(app);
 	controller.updateHTML("app")
-	assert.isTrue(app.innerHTML === '<ul><li><div><a href="0">Headline</a></div></li></ul>')
+	assert.isTrue(app.innerHTML === '<ul><li><div><a href="#0">Headline</a></div></li></ul>')
 })();

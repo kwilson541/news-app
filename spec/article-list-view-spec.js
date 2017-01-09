@@ -23,12 +23,12 @@ emptyArticleList.showArticles = function() {
 
 (function testListArticles() {
 	var articleListView = new ArticleListView(articleList);
-	assert.isTrue(articleListView.listArticles() === '<ul><li><div><a href="0">Headline</a></div></li></ul>')
+	assert.isTrue(articleListView.listArticles() === '<ul><li><div><a href="#0">Headline</a></div></li></ul>')
 })();
 
 (function testListMultipleArticles() {
 	var articleListView = new ArticleListView(multipleArticleList);
-	assert.isTrue(articleListView.listArticles() === '<ul><li><div><a href="0">Headline</a></div></li><li><div><a href="0">Headline</a></div></li></ul>')
+	assert.isTrue(articleListView.listArticles() === '<ul><li><div><a href="#0">Headline</a></div></li><li><div><a href="#0">Headline</a></div></li></ul>')
 })();
 
 (function testListNoArticles() {

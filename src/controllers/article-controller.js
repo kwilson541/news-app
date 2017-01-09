@@ -24,9 +24,9 @@
 		self.xhr.open("GET", "http://news-summary-api.herokuapp.com/guardian?apiRequestUrl=http://content.guardianapis.com/search?show-fields=all&from-date=2017-01-01&to-date=2017-01-07", true)
 		self.xhr.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
-				// console.log(JSON.parse(this.responseText))
 				this.resultsArray = JSON.parse(this.responseText).response.results;
 				self.processResultsArray(this.resultsArray);
+				self.makeURLChangeShowArticleInCurrentPage();
 			};
 		};
 		self.xhr.send();
@@ -38,6 +38,30 @@
 		});
 		self.addArticleListView();
 		self.updateHTML();
+	};
+
+	ArticleController.prototype.makeURLChangeShowArticleInCurrentPage = function() {
+		window.addEventListener("hashchange", self.showArticleForCurrentPage());
+	};
+
+	ArticleController.prototype.showArticleForCurrentPage = function() {
+		self.findArticle(self.getArticleFromURL(window.location));
+	};
+
+	ArticleController.prototype.getArticleFromURL = function(location) {
+		return location.hash.split("#")[1];
+	};
+
+	ArticleController.prototype.findArticle = function(id) {
+		article = self._articleList.showArticles()[id];
+		singleArticleView = new SingleArticleView(article);
+		self.showArticle(singleArticleView);
+	};
+
+	ArticleController.prototype.showArticle = function(article) {
+		document
+			.getElementById("app")
+			.innerHTML = article.viewArticle();
 	};
 
 	exports.ArticleController = ArticleController;
