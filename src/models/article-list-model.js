@@ -13,7 +13,8 @@
 	};
 
 	ArticleList.prototype.createArticle = function(headline, body) {
-		var article = new Article(headline, body);
+		var id = this._articles.length;
+		var article = new Article(headline, body, id);
 		this.addArticle(article);
 	};
 
