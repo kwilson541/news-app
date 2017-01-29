@@ -30,7 +30,7 @@ If you wish to host the app on a local server, do the following:
 
 Notes
 -----
-* *Page loading bug:* There is currently a bug with the hashchange event, whereby upon clicking a headline the URL will change, but new content will not load until the page has been manually refreshed.
-* *CSS:* I would like to add CSS to the news-app to make it a little more aesthetically pleasing!
-* *Homepage Summary:* I would like to add a character limited summary to the homepage beneath each headline
-* *Images:* I would like to add images to each story page
+* **Page loading bug:** There is currently a bug with the hashchange event, whereby upon clicking a headline the URL will change, but new content will not load until the page has been manually refreshed.
+* **CSS:** I would like to add CSS to the news-app to make it a little more aesthetically pleasing!
+* **Homepage Summary:** I would like to add a character limited summary to the homepage beneath each headline
+* **Images:** I would like to add images to each story page
